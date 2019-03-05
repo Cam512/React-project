@@ -13,7 +13,6 @@ class App extends Component {
     otherState: 'some other value',
     showPersons: false
   }
-
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
@@ -42,10 +41,11 @@ class App extends Component {
     const doesShow = this.state.showPersons;
     this.setState({showPersons: !doesShow});
   }
-
+ 
   render() {
     const style = {
-      backgroundColor: 'White',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -67,12 +67,23 @@ class App extends Component {
           })}
         </div>
       );
+
+      style.backgroundColor = 'red';
+      
+    }
+    
+    const classes = []; 
+    if (this.state.persons.length <= 2) {
+      classes.push('red'); // classes = ['red']
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold'); // classes = ['red', 'bold']
     }
 
     return (
       <div className="App">
         <h1>Hi, I'm a React app</h1>
-        <p>This is working.</p>
+        <p className={classes.join(' ')}>This is working.</p>
         <button 
           style={style}
           onClick={this.togglePersonsHandler}>Toggle persons</button>
